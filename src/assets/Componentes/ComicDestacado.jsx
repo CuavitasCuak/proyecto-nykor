@@ -1,7 +1,81 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 
 export const ComicDestacado = () => {
+
+  const subRef = useRef(null);
+  const titleRef = useRef(null);
+  const typeRef = useRef(null);
+  const descRef = useRef(null);
+  const btnRef = useRef(null);
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+
+    const ctx = gsap.context(() => {
+
+      const tl = gsap.timeline({
+        repeat: -1,        // 🔁 infinito
+        repeatDelay: 3,    // ⏱ pausa entre ciclos (ajústalo)
+      });
+
+      // 🔥 estado inicial (evita opacidad rara)
+      gsap.set([
+        subRef.current,
+        titleRef.current,
+        typeRef.current,
+        descRef.current,
+        btnRef.current,
+        footerRef.current
+      ], {
+        opacity: 0,
+        y: 25
+      });
+
+      // 🎬 animación en secuencia
+      tl.to(subRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+      })
+
+      .to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, "-=0.3")
+
+      .to(typeRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+      }, "-=0.4")
+
+      .to(descRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, "-=0.4")
+
+      .to(btnRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+      }, "-=0.3")
+
+      .to(footerRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+      }, "-=0.2");
+
+    });
+
+    return () => ctx.revert();
+
+  }, []);
+
   return (
     <section
       style={{
@@ -14,38 +88,33 @@ export const ComicDestacado = () => {
         padding: "8rem 0",
       }}
     >
-      <div
-        style={{
-          width: "90%",
-          maxWidth: "1400px",
-        }}
-      >
+      <div style={{ width: "90%", maxWidth: "1400px" }}>
 
         {/* TITULO */}
-        <div
-          style={{
-            marginBottom: "5rem",
-          }}
-        >
+        <div style={{ marginBottom: "5rem" }}>
 
           <p
+            ref={subRef}
             style={{
               color: "#8A8A8A",
               letterSpacing: "0.4rem",
               textTransform: "uppercase",
               marginBottom: "1rem",
+              willChange: "transform, opacity",
             }}
           >
             Universo actual
           </p>
 
           <h2
+            ref={titleRef}
             style={{
               color: "#FFFFFF",
               fontSize: "5rem",
               fontWeight: "900",
               lineHeight: "5rem",
               textTransform: "uppercase",
+              willChange: "transform, opacity",
             }}
           >
             El silencio
@@ -69,31 +138,10 @@ export const ComicDestacado = () => {
           }}
         >
 
-          {/* GLOW */}
-          <div
-            style={{
-              width: "25rem",
-              height: "25rem",
-              backgroundColor: "rgba(255,255,255,0.05)",
-              borderRadius: "50%",
-              filter: "blur(100px)",
-              position: "absolute",
-              right: "10%",
-              top: "10%",
-            }}
-          ></div>
-
           {/* IMAGEN */}
-          <div
-            style={{
-              flex: "1",
-              minWidth: "320px",
-            }}
-          >
-
-            {/* AQUI VA EL TEASER */}
+          <div style={{ flex: "1", minWidth: "320px" }}>
             <img
-              src="/orien.jpg"
+              src="/inicio.png"
               alt="El silencio de Orien"
               style={{
                 width: "100%",
@@ -112,89 +160,83 @@ export const ComicDestacado = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              position: "relative",
-              zIndex: "2",
             }}
           >
 
             <p
+              ref={typeRef}
               style={{
                 color: "#8A8A8A",
                 letterSpacing: "0.3rem",
                 textTransform: "uppercase",
                 marginBottom: "1.5rem",
+                willChange: "transform, opacity",
               }}
             >
               Comic principal
             </p>
 
-            <h3
-              style={{
-                color: "#FFFFFF",
-                fontSize: "4rem",
-                fontWeight: "900",
-                lineHeight: "4rem",
-                marginBottom: "2rem",
-                textTransform: "uppercase",
-              }}
-            >
+            <h3 style={{
+              color: "#FFFFFF",
+              fontSize: "4rem",
+              fontWeight: "900",
+              lineHeight: "4rem",
+              marginBottom: "2rem",
+              textTransform: "uppercase",
+            }}>
               El silencio
               <br />
               de Orien
             </h3>
 
             <p
+              ref={descRef}
               style={{
                 color: "#8A8A8A",
                 fontSize: "1.15rem",
                 lineHeight: "2rem",
                 marginBottom: "3rem",
                 maxWidth: "600px",
+                willChange: "transform, opacity",
               }}
             >
-              El silencio de Orien explora un mundo marcado
-              por el miedo, la pérdida y las consecuencias
-              del poder humano.
-              <h2></h2>
-              A través de una narrativa oscura y cinematográfica,
-              la historia sigue personajes atrapados en un universo
-              donde sobrevivir significa enfrentarse a aquello
-              que intentan ocultar.
+              El silencio de Orien explora un mundo marcado por el miedo, la pérdida y las consecuencias del poder humano.
             </p>
 
-            {/* BOTON */}
             <Link
+              ref={btnRef}
               to="/comic"
               style={{
                 width: "fit-content",
                 backgroundColor: "#FFFFFF",
                 color: "#000000",
-                border: "none",
                 padding: "1rem 2.2rem",
                 borderRadius: "1rem",
                 fontWeight: "700",
                 textTransform: "uppercase",
-                letterSpacing: "0.08rem",
-                cursor: "pointer",
                 textDecoration: "none",
                 display: "inline-block",
+                willChange: "transform, opacity",
               }}
             >
               Explorar comic
             </Link>
 
-            {/* TEXTO ABAJO */}
             <p
+              ref={footerRef}
               style={{
                 color: "#555555",
                 marginTop: "2rem",
                 fontSize: "0.95rem",
+                willChange: "transform, opacity",
               }}
             >
               Próximamente más historias del Nykor.
             </p>
+
           </div>
         </div>
+
       </div>
     </section>
   );

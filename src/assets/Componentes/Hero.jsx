@@ -1,13 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { InfoNykor } from './InfoNykor';
 
 export const Hero = () => {
 
   const [mostrarInfo, setMostrarInfo] = useState(false);
+  const [mostrarArchivos, setMostrarArchivos] = useState(false);
+
+  const textoRef = useRef(null);
+  const kianRef = useRef(null);
+  const botonInfoRef = useRef(null);
+
+  useEffect(() => {
+
+    const ctx = gsap.context(() => {
+
+      const tl = gsap.timeline();
+
+      // Entrada texto
+      tl.from(textoRef.current.children, {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power4.out",
+      });
+
+      // Entrada imagen
+      tl.from(
+        kianRef.current,
+        {
+          scale: 1.1,
+          duration: 1.2,
+          ease: "power4.out",
+        },
+        "-=0.7"
+      );
+
+      // Flotación imagen
+      gsap.to(kianRef.current, {
+        y: -18,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+    });
+
+    return () => ctx.revert();
+
+  }, []);
+
+  const abrirInfo = () => {
+    gsap.to(botonInfoRef.current, {
+      scale: 0.92,
+      duration: 0.15,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.out",
+      onComplete: () => {
+        setMostrarInfo(true);
+      }
+    });
+  };
+
+  const toggleArchivos = () => {
+    setMostrarArchivos((prev) => !prev);
+  };
 
   return (
     <>
-    
       <section
         style={{
           width: "100%",
@@ -17,7 +80,7 @@ export const Hero = () => {
           alignItems: "center",
           justifyContent: "center",
           padding: "5rem 0",
-          overflow: "hidden",
+          overflow: "visible",
         }}
       >
         <div
@@ -34,13 +97,13 @@ export const Hero = () => {
 
           {/* IZQUIERDA */}
           <div
+            ref={textoRef}
             style={{
               flex: "1",
               minWidth: "320px",
             }}
           >
 
-            {/* TEXTO PEQUEÑO */}
             <p
               style={{
                 color: "#8A8A8A",
@@ -53,7 +116,6 @@ export const Hero = () => {
               Universo narrativo cinematográfico
             </p>
 
-            {/* TITULO */}
             <h1
               style={{
                 color: "#FFFFFF",
@@ -71,7 +133,6 @@ export const Hero = () => {
               en la sombra.
             </h1>
 
-            {/* TEXTO */}
             <p
               style={{
                 color: "#8A8A8A",
@@ -86,35 +147,96 @@ export const Hero = () => {
               los webtoons y la ciencia ficción psicológica.
             </p>
 
-            {/* BOTONES */}
-            <div
-              style={{
-                display: "flex",
-                gap: "1.5rem",
-                flexWrap: "wrap",
-              }}
-            >
+            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
 
-              {/* BOTON 1 */}
-              <button
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  color: "#000000",
-                  border: "none",
-                  padding: "1rem 2.2rem",
-                  borderRadius: "1rem",
-                  fontWeight: "700",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08rem",
-                  cursor: "pointer",
-                }}
-              >
-                Explorar comics
-              </button>
+              {/* BOTÓN ARCHIVOS */}
+              <div style={{ position: "relative" }}>
 
-              {/* BOTON 2 */}
+                <button
+                  onClick={toggleArchivos}
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    color: "#000",
+                    border: "none",
+                    padding: "1rem 2.2rem",
+                    borderRadius: "1rem",
+                    fontWeight: "700",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Explorar archivos
+                </button>
+
+                {mostrarArchivos && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "110%",
+                      left: 0,
+                      width: "220px",
+                      backgroundColor: "#0f0f0f",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: "1rem",
+                      padding: "0.5rem",
+                      zIndex: 9999,
+                      boxShadow: "0 20px 50px rgba(0,0,0,0.6)",
+                    }}
+                  >
+                    <a
+                      href="/book.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "block",
+                        padding: "0.9rem 1rem",
+                        color: "#fff",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(255,255,255,0.06)",
+                      }}
+                    >
+                      📘 Book
+                    </a>
+
+                    <a
+                      href="/guia-manual.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "block",
+                        padding: "0.9rem 1rem",
+                        color: "#fff",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(255,255,255,0.06)",
+                      }}
+                    >
+                      📄 Guía manual
+                    </a>
+
+                    <a
+                      href="https://indd.adobe.com/view/5205938d-4e89-4f01-b221-8e19951ab34a"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "block",
+                        padding: "0.9rem 1rem",
+                        color: "#fff",
+                        textDecoration: "none",
+                      }}
+                    >
+                      📰 Revista
+                    </a>
+                  </div>
+
+                )}
+
+              </div>
+
+              {/* BOTÓN INFO */}
               <button
-                onClick={() => setMostrarInfo(true)}
+                ref={botonInfoRef}
+                onClick={abrirInfo}
                 style={{
                   backgroundColor: "transparent",
                   color: "#FFFFFF",
@@ -129,6 +251,7 @@ export const Hero = () => {
               >
                 Conoce más
               </button>
+
             </div>
           </div>
 
@@ -139,48 +262,27 @@ export const Hero = () => {
               minWidth: "320px",
               display: "flex",
               justifyContent: "center",
-              position: "relative",
+              alignItems: "center",
             }}
           >
-
-            {/* GLOW */}
-            <div
+            <img
+              ref={kianRef}
+              src="/Kian-inicio.png"
+              alt="Personaje"
               style={{
-                width: "30rem",
-                height: "30rem",
+                width: "38rem",
+                height: "38rem",
+                maxWidth: "100%",
+                objectFit: "cover",
+                objectPosition: "top",
                 borderRadius: "50%",
-                backgroundColor: "rgba(255,255,255,0.08)",
-                position: "absolute",
-                filter: "blur(90px)",
+                userSelect: "none",
+                pointerEvents: "none",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
               }}
-            ></div>
-
-            {/* CIRCULO */}
-            <div
-              style={{
-                width: "35rem",
-                height: "35rem",
-                borderRadius: "50%",
-                border: "2px solid rgba(255,255,255,0.1)",
-                position: "absolute",
-              }}
-            ></div>
-
-            {/* IMAGEN */}
-          <img
-  src="/public/kian-inicio.png"
-  alt="Personaje"
-  style={{
-    width: "35rem",
-    height: "35rem",
-    objectFit: "cover",
-    objectPosition: "top",
-    borderRadius: "50%",
-    position: "relative",
-    zIndex: "2",
-  }}
-/>
+            />
           </div>
+
         </div>
       </section>
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 export const NavBarComic = () => {
   return (
@@ -20,7 +20,6 @@ export const NavBarComic = () => {
           margin: "0 auto",
         }}
       >
-
         {/* LOGO */}
         <div
           className="logo"
@@ -49,9 +48,7 @@ export const NavBarComic = () => {
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          style={{
-            backgroundColor: "#FFFFFF",
-          }}
+          style={{ backgroundColor: "#FFFFFF" }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -63,75 +60,70 @@ export const NavBarComic = () => {
         >
           <ul
             className="navbar-nav align-items-center"
-            style={{
-              gap: "2.5rem",
-            }}
+            style={{ gap: "2.5rem" }}
           >
-
             {/* INICIO */}
             <li className="nav-item">
-            <Link
-              className="nav-link"
-              to="/"
-              style={{
-                color: "rgba(255,255,255,0.65)",
-                fontWeight: "600",
-                fontSize: "1rem",
-                letterSpacing: "0.15rem",
-                textTransform: "uppercase",
-                paddingBottom: "0.4rem",
-                textDecoration: "none"
-              }}
-            >
-              INICIO
-            </Link>
-          </li>
-            {/* COMIC */}
-            <li className="nav-item">
-              <a
+              <Link
+                to="/"
                 className="nav-link"
-                href="#"
                 style={{
-                  color: "rgb(255, 255, 255)",
-                  fontWeight: "500",
+                  color: "rgba(255,255,255,0.65)",
+                  fontWeight: "600",
                   fontSize: "1rem",
                   letterSpacing: "0.15rem",
-                  borderBottom: "2px solid #FFFFFF",
                   textTransform: "uppercase",
-                  transition: "0.3s",
+                  textDecoration: "none",
                 }}
               >
-                Comic
-              </a>
+                INICIO
+              </Link>
+            </li>
+
+            {/* COMIC */}
+            <li className="nav-item">
+              <Link
+                to="/comic"
+                className="nav-link"
+                style={{
+                  color: "#fff",
+                  fontWeight: "600",
+                  fontSize: "1rem",
+                  letterSpacing: "0.15rem",
+                  textTransform: "uppercase",
+                  borderBottom: "2px solid #FFFFFF",
+                  textDecoration: "none",
+                }}
+              >
+                COMIC
+              </Link>
             </li>
 
             {/* TIENDA */}
             <li className="nav-item">
-              <a
+              <Link
+                to="/tienda"
                 className="nav-link"
-                href="#"
                 style={{
                   color: "rgba(255,255,255,0.65)",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1rem",
                   letterSpacing: "0.15rem",
                   textTransform: "uppercase",
-                  transition: "0.3s",
+                  textDecoration: "none",
                 }}
               >
-                Tienda
-              </a>
+                TIENDA
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* BOTON LOGIN */}
+        {/* LOGIN */}
         <div className="d-flex align-items-center">
-          <a
-            href="#"
-            style={{
-              textDecoration: "none",
-            }}
+          <Link
+            to="/login"
+            style={{ textDecoration: "none" }}
           >
             <div
               style={{
@@ -142,11 +134,9 @@ export const NavBarComic = () => {
                 alignItems: "center",
                 gap: "0.8rem",
                 color: "#FFFFFF",
-                transition: "0.3s",
                 cursor: "pointer",
               }}
             >
-
               {/* ICONO */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +165,7 @@ export const NavBarComic = () => {
                 Iniciar sesión
               </span>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

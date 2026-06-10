@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
   return (
@@ -20,7 +20,6 @@ export const NavBar = () => {
           margin: "0 auto",
         }}
       >
-
         {/* LOGO */}
         <div
           className="logo"
@@ -67,7 +66,6 @@ export const NavBar = () => {
               gap: "2.5rem",
             }}
           >
-
             {/* INICIO */}
             <li className="nav-item">
               <Link
@@ -81,7 +79,7 @@ export const NavBar = () => {
                   textTransform: "uppercase",
                   borderBottom: "2px solid #FFFFFF",
                   paddingBottom: "0.4rem",
-                  textDecoration: "none"
+                  textDecoration: "none",
                 }}
               >
                 INICIO
@@ -90,27 +88,28 @@ export const NavBar = () => {
 
             {/* COMIC */}
             <li className="nav-item">
-            <Link
-              className="nav-link"
-              to="/comic"
-              style={{
-                color: "rgba(255,255,255,0.65)",
-                fontWeight: "600",
-                fontSize: "1rem",
-                letterSpacing: "0.15rem",
-                textTransform: "uppercase",
-                paddingBottom: "0.4rem",
-                textDecoration: "none"
-              }}
-            >
-              COMIC
-            </Link>
-          </li>
+              <Link
+                className="nav-link"
+                to="/comic"
+                style={{
+                  color: "rgba(255,255,255,0.65)",
+                  fontWeight: "600",
+                  fontSize: "1rem",
+                  letterSpacing: "0.15rem",
+                  textTransform: "uppercase",
+                  paddingBottom: "0.4rem",
+                  textDecoration: "none",
+                }}
+              >
+                COMIC
+              </Link>
+            </li>
+
             {/* TIENDA */}
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link"
-                href="#"
+                to="/tienda"
                 style={{
                   color: "rgba(255,255,255,0.65)",
                   fontWeight: "500",
@@ -118,21 +117,20 @@ export const NavBar = () => {
                   letterSpacing: "0.15rem",
                   textTransform: "uppercase",
                   transition: "0.3s",
+                  textDecoration: "none",
                 }}
               >
-                Tienda
-              </a>
+                TIENDA
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* BOTON LOGIN */}
         <div className="d-flex align-items-center">
-          <a
-            href="#"
-            style={{
-              textDecoration: "none",
-            }}
+          <Link
+            to="/login"
+            style={{ textDecoration: "none" }}
           >
             <div
               style={{
@@ -147,7 +145,6 @@ export const NavBar = () => {
                 cursor: "pointer",
               }}
             >
-
               {/* ICONO */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +173,7 @@ export const NavBar = () => {
                 Iniciar sesión
               </span>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

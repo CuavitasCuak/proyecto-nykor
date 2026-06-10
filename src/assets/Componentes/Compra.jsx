@@ -1,54 +1,134 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-function Producto({ src, precio, nombre }) {
-  let [hover, setHover] = useState(false);
+export const Compra = () => {
+  const [hoverIndex, setHoverIndex] = useState(null);
+
+  const productos = [
+    {
+      id: 1,
+      nombre: "Libro",
+      precio: "$40.000",
+      img: "/libro.png",
+    },
+    {
+      id: 2,
+      nombre: "Sticker",
+      precio: "$1.000",
+      img: "/stiker.png",
+    },
+    {
+      id: 3,
+      nombre: "Personaje 3d",
+      precio: "$80.000",
+      video: "/3d.mp4", // 👈 video desde public
+    },
+  ];
 
   return (
-    <div
-      style={{ position: "relative", width: "230px", cursor: "pointer" }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+    <section
+      id="tienda"
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "#050505",
+        color: "#ffffff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "80px",
+        paddingBottom: "60px",
+      }}
     >
-      <img src={src} style={{ width: "230px", display: "block", borderRadius: "6px" }} />
+      <div
+        style={{
+          width: "90%",
+          maxWidth: "1200px",
+          display: "flex",
+          justifyContent: "center",
+          gap: "60px",
+          flexWrap: "wrap",
+        }}
+      >
+        {productos.map((producto, index) => (
+          <div
+            key={producto.id}
+            onMouseEnter={() => setHoverIndex(index)}
+            onMouseLeave={() => setHoverIndex(null)}
+            style={{
+              width: "250px",
+              backgroundColor: "#111",
+              padding: "20px",
+              borderRadius: "12px",
+              textAlign: "center",
+              position: "relative",
+              transition: "transform 0.3s ease",
+              transform: hoverIndex === index ? "scale(1.08)" : "scale(1)",
+              cursor: "pointer",
+              overflow: "hidden",
+            }}
+          >
+            {/* MEDIA (IMG O VIDEO) */}
+            {producto.video ? (
+              <video
+                src={producto.video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{
+                  width: "100%",
+                  height: "200px",
+                  objectFit: "contain",
+                  marginBottom: "15px",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.4)",
+                  borderRadius: "8px",
+                }}
+              />
+            ) : (
+              <img
+                src={producto.img}
+                alt={producto.nombre}
+                style={{
+                  width: "100%",
+                  height: "200px",
+                  objectFit: "contain",
+                  marginBottom: "15px",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.4)",
+                }}
+              />
+            )}
 
-      {hover && (
-        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.7)", color: "#fff", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", borderRadius: "6px" }}>
-          <p style={{ margin: "0 0 10px 0", fontSize: "14px", textAlign: "center" }}>
-            {precio}<br />{nombre}
-          </p>
-          <button style={{ background: "#A01519", border: "none", padding: "6px 14px", color: "#fff", fontSize: "13px", borderRadius: "4px", cursor: "pointer" }}>
-            Agregar a 🛒
-          </button>
-        </div>
-      )}
-    </div>
+            <h3>{producto.nombre}</h3>
+            <p>{producto.precio}</p>
+
+            {/* OVERLAY HOVER */}
+            {hoverIndex === index && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0,0,0,0.85)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "15px",
+                  textAlign: "center",
+                  borderRadius: "12px",
+                }}
+              >
+                <p style={{ fontSize: "14px", lineHeight: "1.4" }}>
+                  Venta del artículo únicamente por redes sociales.
+                  <br />
+                  Esta tienda es una simulación para presentación.
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
   );
-}
-
-export function Compra() {
-  return (
-    <>
-      <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 40px", boxSizing: "border-box" }}></div>
-
-      <div style={{ width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", padding: "10px 40px", gap: "10px", boxSizing: "border-box" }}>
-        <img src="/carro.png" style={{ width: "2rem" }} />
-        <p style={{ margin: 0, fontSize: "14px", fontWeight: "bold" }}>Carro de compras</p>
-      </div>
-
-      <p style={{ textAlign: "center", marginTop: "20px", fontSize: "14px", width: "90%", maxWidth: "600px", marginLeft: "auto", marginRight: "auto" }}>
-        Aquí encontrarás productos que materializan nuestra historia.<br />
-        Cada artículo fue creado para habitar entre la realidad y lo simbólico.
-      </p>
-
-      <div style={{ display: "flex", justifyContent: "center", gap: "70px", marginTop: "40px", flexWrap: "wrap" }}>
-        <Producto src="/sueter.png" precio="$ 120.000 COP" nombre="Buzo Visumbrio" />
-        <Producto src="/mug.png" precio="$ 35.000 COP" nombre="Taza Visumbrio" />
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "center", gap: "60px", flexWrap: "wrap", marginTop: "50px" }}>
-        <Producto src="/agenda.png" precio="$ 50.000 COP" nombre="Agenda Visumbrio" />
-        <Producto src="/tote.png" precio="$ 40.000 COP" nombre="Tote Bag Visumbrio" />
-      </div>
-    </>
-  );
-}
+};

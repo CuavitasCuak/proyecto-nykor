@@ -1,13 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { SobreAndrea } from './SobreAndrea';
 
 export const InfoNykor = () => {
 
   const [mostrarAndrea, setMostrarAndrea] = useState(false);
 
+  const textoRef = useRef(null);
+  const logoRef = useRef(null);
+  const botonRef = useRef(null);
+
+  useEffect(() => {
+
+    const ctx = gsap.context(() => {
+
+      const tl = gsap.timeline();
+
+      // Entrada logo
+      tl.from(logoRef.current, {
+        scale: 0.7,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      });
+
+      // Entrada texto
+      tl.from(textoRef.current.children, {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+      }, "-=0.6");
+
+    });
+
+    return () => ctx.revert();
+
+  }, []);
+
+  const abrirAndrea = () => {
+    gsap.to(botonRef.current, {
+      scale: 0.92,
+      duration: 0.15,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.out",
+      onComplete: () => {
+        setMostrarAndrea(true);
+      }
+    });
+  };
+
   return (
     <>
-    
       <section
         style={{
           width: "100%",
@@ -41,8 +87,6 @@ export const InfoNykor = () => {
               position: "relative",
             }}
           >
-
-            {/* GLOW */}
             <div
               style={{
                 width: "25rem",
@@ -52,12 +96,12 @@ export const InfoNykor = () => {
                 filter: "blur(80px)",
                 position: "absolute",
               }}
-            ></div>
+            />
 
-            {/* IMAGEN */}
             <img
-              src="/public/logo-nykor-blanco.png"
-              alt="Zorro"
+              ref={logoRef}
+              src="/logo-nykor-blanco.png"
+              alt="Nykor Logo"
               style={{
                 width: "100%",
                 maxWidth: "300px",
@@ -69,13 +113,13 @@ export const InfoNykor = () => {
 
           {/* DERECHA */}
           <div
+            ref={textoRef}
             style={{
               flex: "1",
               minWidth: "320px",
             }}
           >
 
-            {/* TEXTO PEQUEÑO */}
             <p
               style={{
                 color: "#8A8A8A",
@@ -87,7 +131,6 @@ export const InfoNykor = () => {
               ¿Qué es Nykor?
             </p>
 
-            {/* TITULO */}
             <h2
               style={{
                 color: "#FFFFFF",
@@ -103,7 +146,6 @@ export const InfoNykor = () => {
               entre sombras.
             </h2>
 
-            {/* TEXTO */}
             <p
               style={{
                 color: "#8A8A8A",
@@ -116,27 +158,21 @@ export const InfoNykor = () => {
               Nykor representa inteligencia, misterio y adaptación.
 
               El nombre Nykor nace de la combinación de conceptos relacionados
-              con la noche y la esencia interior.
-              “Ny” representa la oscuridad, el misterio y lo desconocido, 
-              mientras que “Kor” hace referencia al núcleo, la mente y la esencia
-              que existe detrás de cada historia.
+              con la noche y la esencia interior. “Ny” representa la oscuridad,
+              el misterio y lo desconocido, mientras que “Kor” hace referencia
+              al núcleo, la mente y la esencia detrás de cada historia.
 
-              
-              <h2></h2>
-              Juntos forman una identidad inspirada en mundos sombríos, emociones
-              humanas y narrativas construidas desde las sombras.
+              Juntos forman una identidad inspirada en mundos sombríos,
+              emociones humanas y narrativas construidas desde las sombras.
 
-              El zorro fue elegido como símbolo principal de la
-              marca por representar astucia, estrategia e inteligencia.
-              En muchas culturas, el zorro simboliza la capacidad de
-              sobrevivir y adaptarse incluso en los escenarios más
-              difíciles, algo que conecta directamente con la esencia
-              de Nykor y sus historias.
+              El zorro fue elegido como símbolo principal por representar
+              astucia, estrategia e inteligencia, conectando con la esencia
+              de Nykor.
             </p>
 
-            {/* BOTON */}
             <button
-              onClick={() => setMostrarAndrea(true)}
+              ref={botonRef}
+              onClick={abrirAndrea}
               style={{
                 backgroundColor: "#FFFFFF",
                 color: "#000000",

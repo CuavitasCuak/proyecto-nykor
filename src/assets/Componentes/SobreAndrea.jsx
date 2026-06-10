@@ -1,6 +1,40 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 export const SobreAndrea = () => {
+
+  const textoRef = useRef(null);
+  const imagenRef = useRef(null);
+
+  useEffect(() => {
+
+    const ctx = gsap.context(() => {
+
+      const tl = gsap.timeline();
+
+      // entrada texto
+      tl.from(textoRef.current.children, {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+
+      // entrada imagen
+      tl.from(imagenRef.current, {
+        scale: 0.85,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      }, "-=0.6");
+
+    });
+
+    return () => ctx.revert();
+
+  }, []);
+
   return (
     <section
       style={{
@@ -27,6 +61,7 @@ export const SobreAndrea = () => {
 
         {/* TEXTO */}
         <div
+          ref={textoRef}
           style={{
             flex: "1",
             minWidth: "320px",
@@ -67,20 +102,13 @@ export const SobreAndrea = () => {
               maxWidth: "600px",
             }}
           >
-            Andrea Marín es la creadora de Nykor, un universo
-            narrativo inspirado en el miedo, la pérdida y las
-            consecuencias del poder humano.
+            Andrea Marín es la creadora de Nykor, un universo narrativo inspirado en el miedo, la pérdida y las consecuencias del poder humano.
 
-            A través de una estética oscura y cinematográfica,
-            busca construir historias capaces de transmitir emociones
-            reales, mezclando ilustración, narrativa y crítica social
-            en un mismo mundo.
+            A través de una estética oscura y cinematográfica, busca construir historias capaces de transmitir emociones reales, mezclando ilustración, narrativa y crítica social en un mismo mundo.
 
-            Inspirada por el cine, los webtoons y la ciencia ficción
-            psicológica, Andrea desarrolla personajes complejos y
-            escenarios intensos que reflejan los conflictos humanos
-            desde una visión más emocional y artística.
+            Inspirada por el cine, los webtoons y la ciencia ficción psicológica, desarrolla personajes complejos y escenarios intensos que reflejan los conflictos humanos desde una visión más emocional y artística.
           </p>
+
         </div>
 
         {/* FOTO */}
@@ -104,11 +132,12 @@ export const SobreAndrea = () => {
               filter: "blur(80px)",
               position: "absolute",
             }}
-          ></div>
+          />
 
           {/* IMAGEN */}
           <img
-            src="/public/creador.jpeg"
+            ref={imagenRef}
+            src="/creador.jpeg"
             alt="Andrea"
             style={{
               width: "30rem",
@@ -121,6 +150,7 @@ export const SobreAndrea = () => {
               zIndex: "2",
             }}
           />
+
         </div>
 
       </div>

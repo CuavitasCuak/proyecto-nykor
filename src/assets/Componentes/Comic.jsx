@@ -1,13 +1,15 @@
-import { ComicDestacado } from './ComicDestacado'
 import { NavBarComic } from './NavBarComic'
+import { ComicMenu } from './ComicMenu'
+import { InfoComic } from './InfoComic'
 import { Footer } from './Footer'
 
 export const Comic = () => {
   return (
     <>
       <NavBarComic />
-      <ComicDestacado />
-      <Footer />
+      <InfoComic />
+      <ComicMenu />
+      <Footer/>
     </>
   )
 }
