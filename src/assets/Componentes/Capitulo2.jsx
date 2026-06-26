@@ -1,25 +1,41 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { FaHome, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import "./Comic.css";
+
 
 export const Capitulo2 = () => {
   return (
-    <div
-      style={{
-      
-        backgroundColor: "#000",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <img
-        src="/Cn.png"
-        alt="Capitulo 2"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-        }}
-      />
+     <div className="comic-contenedor">
+
+      {/* Botón inicio */}
+      <Link to="/comic" className="boton-home">
+        <FaHome />
+      </Link>
+
+      {/* Flecha anterior */}
+    
+      <Link to="/comic" className="flecha flecha-izquierda">
+        <FaChevronLeft />
+      </Link>
+
+      {/* Escena principal */}
+      <div className="escena-comic">
+
+        {/* Aquí va el contenido de cada capítulo */}
+        <div className="contenido-escena">
+          <h1>Prologo</h1>
+          <p>Aquí irá la escena interactiva.</p>
+        </div>
+
+      </div>
+
+      {/* Flecha siguiente */}
+    
+      <Link to="/comic/capitulo3" className="flecha flecha-derecha">
+      <FaChevronRight />
+    </Link>
+
     </div>
   );
 };

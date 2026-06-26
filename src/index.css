@@ -1,0 +1,23 @@
+/* Scrollbar general */
+::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Fondo del scroll */
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-radius: 10px;
+}
+
+/* La barrita que se mueve */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #8b0000, #270000);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Hover más brillante */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #000000, #530303);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}

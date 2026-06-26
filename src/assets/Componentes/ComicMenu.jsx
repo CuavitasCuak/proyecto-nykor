@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom"
 
-
 export const ComicMenu = () => {
   return (
     <div style={wrap}>
 
-      <h1 style={{ color: "#fff", marginBottom: "2rem" }}>
-        COMIC
+      <h1 style={title}>
+        El silencio de Orien
       </h1>
+
+      <p style={subtitle}>
+        Selecciona un capítulo para comenzar la historia
+      </p>
 
       <div style={carousel}>
 
@@ -34,9 +37,25 @@ export const ComicMenu = () => {
 }
 
 const wrap = {
-  background: "#050505",
+  background: "radial-gradient(circle at top, #111 0%, #050505 60%)",
   minHeight: "100vh",
-  padding: "3rem"
+  padding: "3rem",
+  color: "#fff",
+  fontFamily: "Arial, sans-serif"
+}
+
+const title = {
+  fontSize: "3rem",
+  letterSpacing: "4px",
+  textAlign: "center",
+  marginBottom: "0.5rem",
+  textShadow: "0 0 20px rgba(255,255,255,0.15)"
+}
+
+const subtitle = {
+  textAlign: "center",
+  color: "#aaa",
+  marginBottom: "2.5rem"
 }
 
 const carousel = {
@@ -50,12 +69,21 @@ const carousel = {
 const card = {
   minWidth: "250px",
   height: "350px",
-  background: "#111",
+  background: "linear-gradient(145deg, #1a1a1a, #0d0d0d)",
   color: "#fff",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   textDecoration: "none",
-  borderRadius: "1rem",
-  flexShrink: 0
+  borderRadius: "1.2rem",
+  flexShrink: 0,
+  fontSize: "1.3rem",
+  fontWeight: "bold",
+  letterSpacing: "2px",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.6)",
+  transition: "all 0.3s ease",
+  border: "1px solid rgba(255,255,255,0.05)",
+  cursor: "pointer"
 }
+
+// 👇 efecto hover (inline hack con onMouseEnter/Leave si quieres luego lo mejoramos)

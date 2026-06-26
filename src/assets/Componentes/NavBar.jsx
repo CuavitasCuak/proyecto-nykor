@@ -7,7 +7,7 @@ export const NavBar = () => {
       className="navbar navbar-expand-lg"
       style={{
         width: "100%",
-        height: "8rem",
+        height: "11rem",
         backgroundColor: "#050505",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
       }}

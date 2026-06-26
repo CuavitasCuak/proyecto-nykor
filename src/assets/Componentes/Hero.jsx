@@ -17,7 +17,6 @@ export const Hero = () => {
 
       const tl = gsap.timeline();
 
-      // Entrada texto
       tl.from(textoRef.current.children, {
         y: 80,
         opacity: 0,
@@ -26,7 +25,6 @@ export const Hero = () => {
         ease: "power4.out",
       });
 
-      // Entrada imagen
       tl.from(
         kianRef.current,
         {
@@ -37,7 +35,6 @@ export const Hero = () => {
         "-=0.7"
       );
 
-      // Flotación imagen
       gsap.to(kianRef.current, {
         y: -18,
         duration: 3,
@@ -67,6 +64,25 @@ export const Hero = () => {
 
   const toggleArchivos = () => {
     setMostrarArchivos((prev) => !prev);
+  };
+
+  const itemStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.8rem",
+    padding: "0.9rem 1rem",
+    color: "#fff",
+    textDecoration: "none",
+    borderRadius: "0.7rem",
+    borderBottom: "1px solid rgba(255,255,255,0.06)",
+    cursor: "pointer",
+  };
+
+  const iconStyle = {
+    width: "32px",
+    height: "32px",
+    objectFit: "contain",
+    flexShrink: 0,
   };
 
   return (
@@ -175,7 +191,7 @@ export const Hero = () => {
                       position: "absolute",
                       top: "110%",
                       left: 0,
-                      width: "220px",
+                      width: "260px",
                       backgroundColor: "#0f0f0f",
                       border: "1px solid rgba(255,255,255,0.08)",
                       borderRadius: "1rem",
@@ -184,51 +200,65 @@ export const Hero = () => {
                       boxShadow: "0 20px 50px rgba(0,0,0,0.6)",
                     }}
                   >
+
+                    {/* BOOK */}
                     <a
                       href="/book.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        display: "block",
-                        padding: "0.9rem 1rem",
-                        color: "#fff",
-                        textDecoration: "none",
-                        borderBottom: "1px solid rgba(255,255,255,0.06)",
-                      }}
+                      style={itemStyle}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          "rgba(255,255,255,0.05)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          "transparent")
+                      }
                     >
-                      📘 Book
+                      <img src="/book.png" alt="Book" style={iconStyle} />
+                      <span>Book</span>
                     </a>
 
+                    {/* MANUAL */}
                     <a
                       href="/guia-manual.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        display: "block",
-                        padding: "0.9rem 1rem",
-                        color: "#fff",
-                        textDecoration: "none",
-                        borderBottom: "1px solid rgba(255,255,255,0.06)",
-                      }}
+                      style={itemStyle}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          "rgba(255,255,255,0.05)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          "transparent")
+                      }
                     >
-                      📄 Guía manual
+                      <img src="/manual.png" alt="Manual" style={iconStyle} />
+                      <span>Manual de marca</span>
                     </a>
 
+                    {/* REVISTA */}
                     <a
                       href="https://indd.adobe.com/view/5205938d-4e89-4f01-b221-8e19951ab34a"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        display: "block",
-                        padding: "0.9rem 1rem",
-                        color: "#fff",
-                        textDecoration: "none",
-                      }}
+                      style={{ ...itemStyle, borderBottom: "none" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          "rgba(255,255,255,0.05)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          "transparent")
+                      }
                     >
-                      📰 Revista
+                      <img src="/revista.png" alt="Revista" style={iconStyle} />
+                      <span>Revista Nykor</span>
                     </a>
-                  </div>
 
+                  </div>
                 )}
 
               </div>
@@ -286,7 +316,6 @@ export const Hero = () => {
         </div>
       </section>
 
-      {/* INFO NYKOR */}
       {mostrarInfo && <InfoNykor />}
     </>
   );
