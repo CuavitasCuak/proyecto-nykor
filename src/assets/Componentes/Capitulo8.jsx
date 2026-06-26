@@ -12,15 +12,15 @@ export const Capitulo8 = () => {
         <FaHome />
       </Link>
 
-      {/* ANTERIOR */}
+     
       <Link
         to="/comic/capitulo7"
         className="flecha flecha-izquierda"
       >
-        <FaChevronLeft />
+        <FaChevronLeft /> 
       </Link>
 
-      {/* RECUADRO DEL CÓMIC */}
+      
       <div className="escena-comic">
 
         <img
