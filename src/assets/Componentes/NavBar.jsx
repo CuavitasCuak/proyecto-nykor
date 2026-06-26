@@ -30,7 +30,7 @@ export const NavBar = () => {
           }}
         >
           <img
-            src="./logo-nykor.png"
+            src="/logo-nykor.png"
             alt="Nykor"
             style={{
               width: "80%",
